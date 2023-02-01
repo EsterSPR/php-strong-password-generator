@@ -1,5 +1,31 @@
 <?php
 
+    function pwdGenerate($length){
+        $password = '';
+        $pwValues = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()_+-=[]{}|;:\"<>,.?/\\';
+
+        while(strlen($password) < $length){
+            $pwSingleValue = $pwValues[randomGenerate($pwValues)];
+            $password .= $pwSingleValue;
+        }
+
+        return $password;
+    }
+
+    function randomGenerate($string){
+        return rand(0, strlen($string) - 1);
+    }
+
+    $alert = '';
+ 
+    if(isset($_GET['pwdLength']) && $_GET['pwdLength'] === ''){
+        $alert = 'Nessun parametro valido inserito';
+    }
+    elseif(isset($_GET['pwdLength']) && $_GET['pwdLength'] !== ''){
+        // var_dump($_GET['pwdLength']);
+        $password = pwdGenerate($_GET['pwdLength']);
+    }
+
 ?>
 
 <!DOCTYPE html>
@@ -14,23 +40,38 @@
 </head>
 <body>
     
-    <div class="container">
-        <div class="row text-center mb-4">
+    <div class="container my_container">
+        <div class="row text-center">
             <h1>Strong Password Generator</h1>
             <h2>Genera una password sicura</h2>
+            <p>Nota: Si consiglia di inserire un numero maggiore di 8</p>
         </div>
-        <div class="row bg-white p-5 rounded">
+
+            <?php if($alert !== ''){ ?>
+                <div class="alert alert-info">
+                    <?php echo $alert; ?>
+                </div>
+            <?php } ?>
+
+            <?php if(isset($password)){ ?>
+                <div class="alert alert-info">
+                    La tua password è: <strong> <?php echo $password; ?> </strong>
+                </div>
+            <?php } ?>
+
+        <div class="row bg-white p-5 rounded my-4 my_row">
             <div class="col-12">
-                <form action="">
+                <form action="./index.php" method="GET">
                     <div class="row py-3">
                         <div class="col-6">
                             <label for="pwdLength" class="form-label">Lunghezza password:</label>
                         </div>
                         <div class="col-6">
-                            <input type="text" class="form-control" id="pwdLength" required>
+                            <input type="number" class="form-control" id="pwdLength" name="pwdLength" placeholder="Inserisci un numero">
                         </div>
                     </div>
-                    <div class="row py-3">
+
+                    <!-- <div class="row py-3">
                         <div class="col-6">
                             <label for="pwdRepeat" class="form-label">Consenti ripetizioni di uno o più caratteri:</label>
                         </div>
@@ -49,6 +90,7 @@
                             </div>
                         </div>
                     </div>
+
                     <div class="row py-3">
                         <div class="col-6"></div>
                         <div class="col-6">
@@ -71,16 +113,18 @@
                                 </label>
                             </div>
                         </div>
-                    </div>
+                    </div> -->
+
                     <div class="row py-3">
                         <div class="col-12">
                             <button type="submit" class="btn btn-primary">Invia</button>
-                            <button class="btn btn-secondary">Annulla</button>
+                            <!-- <button class="btn btn-secondary">Annulla</button> -->
                         </div>
                     </div>
                 </form>
             </div>
         </div>
+
     </div>
 
     <script src="./js/script.js"></script>

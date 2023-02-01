@@ -9,10 +9,19 @@ body{
     padding: 100px 300px;
 }
 
-h1{
+h1, p{
     color: #597E9A;
 }
 
 h2{
     color: #ffffff;
+}
+
+.my_container{
+    padding: 0;
+}
+
+.my_row{
+    margin-right: 0;
+    margin-left: 0;
 }
