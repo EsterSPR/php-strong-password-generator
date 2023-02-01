@@ -1,0 +1,18 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body{
+    background-color: #001632;
+    padding: 100px 300px;
+}
+
+h1{
+    color: #597E9A;
+}
+
+h2{
+    color: #ffffff;
+}
