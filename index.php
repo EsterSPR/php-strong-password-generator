@@ -1,30 +1,6 @@
 <?php
 
-    function pwdGenerate($length){
-        $password = '';
-        $pwValues = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()_+-=[]{}|;:\"<>,.?/\\';
-
-        while(strlen($password) < $length){
-            $pwSingleValue = $pwValues[randomGenerate($pwValues)];
-            $password .= $pwSingleValue;
-        }
-
-        return $password;
-    }
-
-    function randomGenerate($string){
-        return rand(0, strlen($string) - 1);
-    }
-
-    $alert = '';
- 
-    if(isset($_GET['pwdLength']) && $_GET['pwdLength'] === ''){
-        $alert = 'Nessun parametro valido inserito';
-    }
-    elseif(isset($_GET['pwdLength']) && $_GET['pwdLength'] !== ''){
-        // var_dump($_GET['pwdLength']);
-        $password = pwdGenerate($_GET['pwdLength']);
-    }
+    include __DIR__ . '/functions.php';
 
 ?>
 
@@ -59,10 +35,10 @@
                 </div>
             <?php } ?>
 
-        <div class="row bg-white p-5 rounded my-4 my_row">
+        <div class="row bg-white p-4 rounded my-4 my_row">
             <div class="col-12">
                 <form action="./index.php" method="GET">
-                    <div class="row py-3">
+                    <div class="row py-2">
                         <div class="col-6">
                             <label for="pwdLength" class="form-label">Lunghezza password:</label>
                         </div>
@@ -71,7 +47,7 @@
                         </div>
                     </div>
 
-                    <!-- <div class="row py-3">
+                    <!-- <div class="row py-2">
                         <div class="col-6">
                             <label for="pwdRepeat" class="form-label">Consenti ripetizioni di uno o più caratteri:</label>
                         </div>
@@ -91,7 +67,7 @@
                         </div>
                     </div>
 
-                    <div class="row py-3">
+                    <div class="row py-2">
                         <div class="col-6"></div>
                         <div class="col-6">
                             <div class="form-check">
@@ -115,7 +91,7 @@
                         </div>
                     </div> -->
 
-                    <div class="row py-3">
+                    <div class="row py-2">
                         <div class="col-12">
                             <button type="submit" class="btn btn-primary">Invia</button>
                             <!-- <button class="btn btn-secondary">Annulla</button> -->
